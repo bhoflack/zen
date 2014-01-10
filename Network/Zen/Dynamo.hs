@@ -6,6 +6,7 @@ module Network.Zen.Dynamo
 import Network.Zen.Monad (Handler (..), MessageHandler (..), runTransitionT)
 import Network.Zen.Types
 
+import qualified Network.Zen.Dynamo.Join as Join
 import qualified Network.Zen.Dynamo.Ping as Ping
 
 handle :: (Functor m, Monad m)
@@ -27,3 +28,4 @@ handleMessage :: (Functor m, Monad m)
               => MessageHandler Message s m r
 handleMessage s m = case m of
   MPing ping -> Ping.handle s ping
+  MJoin join -> Join.handle s join
